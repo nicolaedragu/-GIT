@@ -1,0 +1,49 @@
+==34344== 192 bytes in 4 blocks are definitely lost in loss record 978 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x10A24B: afisare_arbore (quadtree.c:239)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 9,408 (192 direct, 9,216 indirect) bytes in 4 blocks are definitely lost in loss record 979 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x109718: patrat_mic (quadtree.c:94)
+==34344==    by 0x10986F: patrat_mic (quadtree.c:97)
+==34344==    by 0x10A2B5: afisare_arbore (quadtree.c:243)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 15,552 (192 direct, 15,360 indirect) bytes in 4 blocks are definitely lost in loss record 980 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x109718: patrat_mic (quadtree.c:94)
+==34344==    by 0x1098D7: patrat_mic (quadtree.c:98)
+==34344==    by 0x10A2B5: afisare_arbore (quadtree.c:243)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 17,664 (192 direct, 17,472 indirect) bytes in 4 blocks are definitely lost in loss record 981 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x109718: patrat_mic (quadtree.c:94)
+==34344==    by 0x109805: patrat_mic (quadtree.c:96)
+==34344==    by 0x10A2B5: afisare_arbore (quadtree.c:243)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 47,160 bytes in 1 blocks are definitely lost in loss record 982 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x10A46D: afisare_arbore (quadtree.c:252)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 51,456 (192 direct, 51,264 indirect) bytes in 4 blocks are definitely lost in loss record 983 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x109718: patrat_mic (quadtree.c:94)
+==34344==    by 0x10979B: patrat_mic (quadtree.c:95)
+==34344==    by 0x10A2B5: afisare_arbore (quadtree.c:243)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 94,320 (48 direct, 94,272 indirect) bytes in 1 blocks are definitely lost in loss record 984 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x1092A2: initializare_radacina (quadtree.c:38)
+==34344==    by 0x10A21A: afisare_arbore (quadtree.c:232)
+==34344==    by 0x10A69E: main (quadtree.c:292)
+==34344== 
+==34344== 198,656 (2,048 direct, 196,608 indirect) bytes in 1 blocks are definitely lost in loss record 986 of 986
+==34344==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==34344==    by 0x10931C: citire_image (quadtree.c:52)
+==34344==    by 0x10A5F0: main (quadtree.c:283)
+==34344== 

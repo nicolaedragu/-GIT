@@ -9,8 +9,5 @@ quadtree: quadtree.o
 quadtree.o: quadtree.c
 	$(CC) $(CFLAGS) -c $^
 
-run: build
-	./quadtree
-
 clean:
 	rm -f *.o quadtree
