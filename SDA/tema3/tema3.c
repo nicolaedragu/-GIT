@@ -3,20 +3,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct
+typedef struct Node
+{
+    int indice;
+    struct Node *next;
+} Node;
+
+typedef struct Graph
 {
     int numar_noduri;
-    int **mat_ad;
-    
+    Node **mat_ad;
 } Graph;
-
-void alocareMatAd(int ***mat, int nr_nod)
-{
-    int i;
-    *mat = (int **)malloc(nr_nod * sizeof(int*));
-    for (i = 0; i < nr_nod; i++)
-        (*mat)[i] = (int *)malloc(nr_nod * sizeof(int));
-}
 
 Graph *creareGraph(int numar_noduri)
 {
