@@ -1,0 +1,29 @@
+/* DRAGU Nicolae - 314CC */
+    Tema3 SDA
+    
+    Pentru a stoca nodurile in memorie am apelat la o lista de adiacenta, 
+prin structura Graph, unde initializez tot ce apartine grafului. 
+    Prin cateva functii de alocare memorie pentru fiecare nod si actualizare
+a datelor pentru acelasi nod, se trece la citire, ceea ce se face din fisierul
+"tema3.in". 
+    Se copiaza valoarea lui argv[1] in variabila cerinta[1], care se compara 
+cu "1" sau "2" pentru a stii cerinta verificata. 
+    Pentru prima cerinta se citeste harta in functie de muchii si se 
+actualizeaza datele corespunzator.
+    Am o functie 'determinareZone' ce, prin folosirea algoritmului DFS, afla 
+de cate ori este apelata functia DFS din cadrul ei. Acel numar este numarul de
+componente conexe. Prin 'determinareStPoints' aflu inceputul fiecarei 
+componente conexe.
+    Apoi aplic algoritmul Prims pentru a gasi distanta minima dintre nodul
+de inceput al fiecarei componente conexe.
+    Urmeaza sa se sorteze vectorul ce contine costul fiecarui drum, iar apoi
+sunt afisate aceste drumuri in fisierul de iesire. 
+    Pentru cerinta 2, se citeste harta, dar diferit fata de prima cerinta.
+Acum se citesc si adancimile fiecarei insule. A doua functie apelata in cadrul
+cerintei 2 este 'gasireCorabie', ce returneaza indexul Corabiei.
+Pentru gasirea drumului de la Insula la Corabie folosesc algoritmul Dijkstra,
+in functie de scorul fiecarui arc. Se apeleaza functiile 'calculareDrum' si
+'calculareGreutate' pentru calcularea costului total al drumului si pentru
+determinarea numarului de drumuri facute pentru a cara comoara.
+    Pentru eliberarea memoriei folosesc functia 'freeGraph', ce elibereaza tot
+ce este necesar.

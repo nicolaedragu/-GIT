@@ -5,7 +5,7 @@ build: tema3
 	touch tema3.out
 
 tema3: tema3.o
-	$(CC) -o tema3 $^
+	$(CC) -o tema3 $^ -std=c99
 
 tema3.o: tema3.c
 	$(CC) $(CFLAGS) -c $^
