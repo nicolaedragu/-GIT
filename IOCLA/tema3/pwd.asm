@@ -1,87 +1,109 @@
 section .data
-    back db "..", 0
-    curr db ".", 0
-    slash db "/", 0
-    ; declare global vars here
+	back db "..", 0
+	curr db ".", 0
+	slash db "/", 0
+	; declare global vars here
 
 section .text
-    global pwd
+	global pwd
 
 ;;	void pwd(char **directories, int n, char *output)
 ;	Adauga in parametrul output path-ul rezultat din
 ;	parcurgerea celor n foldere din directories
+; PRINTF32 `\n\x0`
 pwd:
-    enter 0, 0
+	enter 0, 0
 
-    push ebp
-    mov ebp, esp
+	mov eax, [esp + 8]
+	mov edx, [esp + 12]
+	mov ecx, [esp + 16]
 
-    mov esi, [ebp + 8]      ; Adresa vectorului de directoare (directories)
-    mov ecx, [ebp + 12]     ; Numărul de directoare (n)
-    mov edi, [ebp + 16]     ; Adresa variabilei output
+	xor edi, edi
+parcurgere_siruri:
+	mov esi, [eax + edi * 4]
+	push edx
+	mov dl, byte [esi]
+	cmp dl, '.'
+	jne director
 
-    xor eax, eax            ; EAX = 0 (poziția curentă în vectorul de directoare)
-    xor edx, edx            ; EDX = 0 (numărul de caractere în calea finală)
+identificare_comanda:
+	mov dl, byte [esi + 1]
+	cmp dl, 0
+	je continuare_parcurgere
+	cmp dl, '.'
+	jne director
+	mov dl, byte [esi + 2]
+	cmp dl, 0
+	jne director
 
-loop_start:
-    cmp eax, ecx            ; Verificăm dacă am parcurs toate directoarele
-    jge loop_end
+anterior:
+	push edi
+	xor edi, edi
+	gasire_sfarsit_1:
+    	cmp byte [ecx + edi], 0
+    	jz iesire_sfarsit_1
 
-    mov ebx, [esi + eax * 4] ; Adresa directorului curent
-    cmp dword [ebx], 0      ; Verificăm dacă directorul curent este un șir vid
-    je loop_next
+    	add edi, 1
+    	jmp gasire_sfarsit_1
+	iesire_sfarsit_1:
 
-    cmp dword [ebx], curr   ; Verificăm dacă directorul curent este "."
-    je loop_next
+	gasire_slash:
+		cmp byte [ecx + edi], '/'
+		jz iesire_slash
 
-    cmp dword [ebx], back   ; Verificăm dacă directorul curent este ".."
-    je loop_back
+		sub edi, 1
+		jmp gasire_slash
+	iesire_slash:
+	mov dl, 0
+	mov byte [ecx + edi], dl
 
-    ; Adăugăm caracterul "/" la sfârșitul calei finale dacă nu există deja
-    movzx edi, byte [edi + edx - 1]
-	mov al, byte [slash]
-	cmp byte [edi], al
-    ; cmp edi, byte [slash]
-    jne add_slash
+	pop edi
+	jmp continuare_parcurgere
 
-add_slash:
-    mov byte [edi + edx], slash
-    inc edx
+director:
+	push edi
+	xor edi, edi
+	gasire_sfarsit_2:
+    	cmp byte [ecx + edi], 0
+    	jz adauga_slash_2
 
-    ; Adăugăm directorul curent la calea finală
-    add ebx, 1              ; Ignorăm lungimea șirului (primul byte)
-add_dir:
-    movzx ecx, byte [ebx]   ; Caracterul curent din director
-    mov byte [edi + edx], cl
-    inc edx
-    inc ebx
-    cmp ecx, 0
-    jne add_dir
+    	add edi, 1
+    	jmp gasire_sfarsit_2
 
-    jmp loop_next
+    adauga_slash_2:
+        mov dl, '/'
+		mov byte [ecx + edi], dl
 
-loop_back:
-    cmp edx, 1              ; Verificăm dacă există suficient spațiu în calea finală
-    jl loop_next
+		add edi, 1
+		push ebx
+		xor ebx, ebx
+        copiaza_sir:
+            mov dl, byte [esi + ebx]
+            mov byte [ecx + edi], dl
+			add ebx, 1
+			add edi, 1
+            cmp dl, 0         
+            jnz copiaza_sir
+	pop ebx
+	pop edi
 
-    ; Eliminăm ultimul director din calea finală (dacă există)
-    mov edx, edx - 1        ; Decrementăm numărul de caractere
-    movzx ecx, byte [edi + edx]
-check_slash:
-    cmp ecx, byte [slash]
-    jne loop_back
+continuare_parcurgere:
+	pop edx
+	add edi, 1
+	cmp edi, edx
+	jl parcurgere_siruri
 
-    ; Eliminăm caracterul "/"
-    mov byte [edi + edx], 0
-    jmp loop_next
+iesire:
+	gasire_sfarsit_3:
+    	cmp byte [ecx + edi], 0
+    	jz adauga_slash_3
 
-loop_next:
-    inc eax                 ; Trecem la următorul director
-    jmp loop_start
+    	add edi, 1
+    	jmp gasire_sfarsit_3
 
-loop_end:
-    mov byte [edi + edx], 0 ; Adăugăm terminarea șirului la sfârșitul calei finale
+    adauga_slash_3:
+        mov dl, '/'
+		mov byte [ecx + edi], dl
 
-    pop ebp
-    leave
-    ret
+	leave
+	ret
