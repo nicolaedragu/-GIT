@@ -1,0 +1,25 @@
+DRAGU Nicolae - 314CC
+
+    Am gandit banda ca o lista ce contine mai multe elemente, fiecare
+de tipul listei duble inlantuite. Se regaseste in aceasta implementare
+a benzii tipul de date Nod* sentinel, ce reprezinta santinela, initializata
+conform cerintei. Nod* finger este degetul, stocheaza pozitia lui, pe ce
+celula este pus degetul, iar final este ultima celula a benzii.
+    Citirea se face din fisier, intai fiind citit numarul de comenzi.
+    Ma folosesc de lista simpla inlantuita Coada pentru a memora, in
+variabilele Comenzi - toate comenziile cu spatiu (ex: WRITE X), ComenziUltim
+- ultima comanda citita iar CopieComenzi - copie a cozii de comenzi.
+    Pentru citirea comenzilor ma folosesc de comanda strcspn pentru a elimina
+endline-ul creeat pe urma executarii comenzii fgets.
+    variabilele Queue si QueueUltim contin prima parte a comenzii, fara spatiu
+(ex: WRITE). QueueUltim este ultima comanda. Ma folosesc de acestea pentru a
+putea descoperi, intr-o structura repetitiva de tip for, ce comenzi trebuie
+executate. Variabilele exec si ultim_exec stocheaza comenziile de tip UPDATE,
+comenziile ce se executeaza doar pe urma exectutarii comenzii EXECUTE.
+    Parcurg pe rand comenziile, de la prima comanda pana la comanda n.
+    Descopar ce comanda este, si ori se stocheaza in exec pentru a putea
+fii executata mai tarziu dupa EXECUTE, ori este executata pe loc.
+    Imediat ce gasesc functia, variabila de tip semafor ok este initializata
+cu 1, pentru a opri compararea functiei curente cu alte functii, diferite de
+aceasta.
+    In final se elibereaza memoria si se inchid fisierele.
