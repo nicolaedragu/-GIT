@@ -1,3 +1,8 @@
+/*
+Determinati nivelul nodului k.
+Faceti suma tuturor nodurilor de pe 
+fiecare nivel.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
