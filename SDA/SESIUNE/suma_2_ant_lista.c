@@ -46,26 +46,36 @@ void insereazaUltim(int valoare, elem **cap, elem **ultim)
 
 void creeaza_listaInlantuita(elem **cap, elem **ultim)
 {
-    int valoare;
+    int a, b, c, s = 0, primacitire = 0, ok = 0;
     while (1)
     {
-        scanf("%d", &valoare);
-        if (valoare == -1)
+        // printf("Introduceti numar: \n");
+        if (primacitire == 0)
+        {
+            scanf("%d", &a);
+            insereazaUltim(a, cap, ultim);
+        }
+        else if (primacitire == 1)
+        {
+            scanf("%d", &b);
+            insereazaUltim(b, cap, ultim);
+        }
+        else if (primacitire >= 2)
+        {
+            ok = 1;
+            scanf("%d", &c);
+            s = a + b;
+            if (c != s) 
+                insereazaUltim(c, cap, ultim);
+        }
+        if ((c == s) && (ok == 1))
             break;
-        insereazaUltim(valoare, cap, ultim);
-    }
-}
-
-// Pentru exemplul cu lista={ 1 , 2 , 3}
-void ex_creeaza_listaInlantuita(elem **cap, elem **ultim, int v[], int n)
-{
-    int valoare;
-    for (int i = 0; i < n; i++)
-    {
-        valoare = v[i];
-        if (valoare == -1)
-            break;
-        insereazaUltim(valoare, cap, ultim);
+        if (primacitire >= 2)
+        {
+            a = b;
+            b = c;
+        }
+        primacitire++;
     }
 }
 
@@ -166,56 +176,16 @@ void stergere_negativ(elem *cap)
             printf("ELSE ");
         }
     }
+
     printf("\n");
-}
-
-int calc_lungime(elem *cap)
-{
-    int l = 0;
-    while (cap != NULL)
-    {
-        l++;
-        cap = cap->urm;
-    }
-    return l;
-}
-
-void permutari(elem *cap, elem *ultim)
-{
-    int l, i, k, x, v[100];
-    l = calc_lungime(cap);
-    elem *circ = (elem *)malloc(l * sizeof(elem));
-    elem *circ_ultim = (elem *)malloc(l * sizeof(elem));
-    circ = cap;
-
-    for (int i = 0; i < l; i++)
-    {
-        v[i] = circ->numar;
-        circ = circ->urm;
-    }
-
-    for (k = 0; k < l; k++)
-    {
-        x = v[0];
-        for (i = 1; i < l; i++)
-            v[i - 1] = v[i];
-        v[l-1] = x;
-        printf ("Permutarea %d\n: ",k+1);
-        ex_creeaza_listaInlantuita(&circ,&circ_ultim,v,l);
-       printeaza_listaInlantuita(circ);
-       free(circ);
-    }
 }
 
 int main()
 {
-    printf("Introduceti lista (-1 pentru a iesi):\n");
+    printf("Introduceti lista:\n");
     creeaza_listaInlantuita(&cap, &ultim);
     printf("Lista inlantuita contine elementele: ");
-    printeaza_listaInlantuita(cap);
-
-    printf("Permutarile sunt:\n");
-    permutari(cap, ultim);
+    printeaza_invers(ultim);
 
     return 0;
 }
