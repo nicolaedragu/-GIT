@@ -37,12 +37,42 @@ void maxime(struct Nod *radacina, int *maxStanga)
 {
     if (radacina == NULL)
         return;
-    
+
     if (radacina->valoare > *maxStanga)
         *maxStanga = radacina->valoare;
-    
+
     maxime(radacina->stanga, maxStanga);
     maxime(radacina->dreapta, maxStanga);
+}
+
+void inordine(struct Nod *radacina)
+{
+    if (radacina != NULL)
+    {
+        inordine(radacina->stanga);
+        printf("%d ", radacina->valoare);
+        inordine(radacina->dreapta);
+    }
+}
+
+void preordine(struct Nod *radacina)
+{
+    if (radacina != NULL)
+    {
+        printf("%d ", radacina->valoare);
+        inordine(radacina->stanga);
+        inordine(radacina->dreapta);
+    }
+}
+
+void postordine(struct Nod *radacina)
+{
+    if (radacina != NULL)
+    {
+        inordine(radacina->stanga);
+        inordine(radacina->dreapta);
+        printf("%d ", radacina->valoare);
+    }
 }
 
 int main()
@@ -60,10 +90,20 @@ int main()
     int max = -1;
     maxime(radacina->stanga, &max);
     printf("Maximul pe stanga: %d\n", max);
-    
+
     max = -1;
     maxime(radacina->dreapta, &max);
 
     printf("Maximul pe dreapta: %d\n", max);
+
+    printf("inordine\n");
+    inordine(radacina);
+
+    printf("preordine\n");
+    preordine(radacina);
+
+    printf("postordine\n");
+    postordine(radacina);
+
     return 0;
 }
