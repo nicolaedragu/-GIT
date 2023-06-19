@@ -100,13 +100,16 @@ int main()
 {
     int v[] = {1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17};
     int size = sizeof(v) / sizeof(v[0]);
-    print_array(v, size);
+    
     build_heap(v, size);
     print_array(v, size);
+    
     insert(v, 100, &size);
     print_array(v, size);
+    
     delete_root(v, 3, &size);
     print_array(v, size);
+    
     heapsort(v, size);
     print_array(v, size);
     return 0;
